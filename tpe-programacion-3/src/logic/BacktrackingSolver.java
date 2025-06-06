@@ -80,14 +80,23 @@ public class BacktrackingSolver  {
     private int minMaquinas;
     private HashMap<String, Boolean> memo;
 
+    public int getCantEstados() {
+        return cantEstados;
+    }
+
+    public void setCantEstados(int cantEstados) {
+        this.cantEstados = cantEstados;
+    }
+
+    private int cantEstados;
+
     public List<Machine> resolver(ArrayList<Machine> machines, int target) {
         mejorSolucion = new ArrayList<>();
         minMaquinas = Integer.MAX_VALUE;
         memo = new HashMap<>();
-
+        setCantEstados(0);
         // 🔹 Ordenar máquinas por producción ascendente
         Collections.sort(machines);
-
         backtrack(machines, target, new ArrayList<>(), 0, 0);
 
         return mejorSolucion;
@@ -98,7 +107,7 @@ public class BacktrackingSolver  {
                               int acumulado,
                               int nextIndex) {
         String clave = acumulado + "-" + nextIndex;
-
+        cantEstados++;
         if (memo.containsKey(clave)) {
             return memo.get(clave);
         }
