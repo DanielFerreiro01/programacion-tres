@@ -1,13 +1,12 @@
 package logic;
 
-import core.Estado;
+//import core.Estado;
 import core.Machine;
 
-import javax.crypto.Mac;
-import java.util.ArrayList;
-import java.util.List;
+//import javax.crypto.Mac;
+import java.util.*;
 
-public class BacktrackingSolver {
+/*public class BacktrackingSolver {
     private List<Machine> mejorSolucion;    // Solo guardamos la mejor
     private int minMaquinas;               // Cantidad mínima de máquinas usadas
 
@@ -53,21 +52,88 @@ public class BacktrackingSolver {
 
     // --------------------         SOLUCIÓN 2         --------------------
 
-    void backtrack(ArrayList<Machine> maquinas, int target, ArrayList<Machine> estadoActual, int sumaActual, ArrayList<Machine> mejorSolucion) {
-        if (sumaActual == target) {//verifica si la suma actual es igual a la buscada
-            if (mejorSolucion.isEmpty() || estadoActual.size() < mejorSolucion.size()) {//verifica q sea la mejor solucion
-                mejorSolucion.clear();
-                mejorSolucion.addAll(estadoActual);
+    void backtrack(List<Machine> machines, int target, List<Machine> seleccionadas, int acumulado, int index) {
+        if (acumulado == target) {
+            if (seleccionadas.size() < minMaquinas) {
+                mejorSolucion = new ArrayList<>(seleccionadas);
+                minMaquinas = seleccionadas.size();
             }
             return;
         }
-        if (sumaActual > target) return;//en caso de que suma acual supere a la buscada, se realiza una poda
 
-        for (Machine maquina : maquinas) {
-            estadoActual.add(maquina);//se agrega la maquina actual
-            backtrack(maquinas, target, estadoActual, sumaActual + maquina.getProduction(), mejorSolucion);//suma y llama a recursividad
-            estadoActual.remove(estadoActual.size() - 1); // Backtrack, el codigo se "desarma"
+        if (seleccionadas.size() >= minMaquinas) return;
+        if(acumulado>target) return;
+
+
+        for (int i = index; i < machines.size(); i++) {
+            Machine m = machines.get(i);
+            seleccionadas.add(m);
+            backtrack(machines, target, seleccionadas, acumulado + m.getProduction(), i); // i para permitir reutilización
+            seleccionadas.remove(seleccionadas.size() - 1); // backtrack explícito
         }
     }
-}
 
+}*/
+
+public class BacktrackingSolver  {
+    private List<Machine> mejorSolucion;
+    private int minMaquinas;
+    private HashMap<String, Boolean> memo;
+
+    public List<Machine> resolver(ArrayList<Machine> machines, int target) {
+        mejorSolucion = new ArrayList<>();
+        minMaquinas = Integer.MAX_VALUE;
+        memo = new HashMap<>();
+
+        // 🔹 Ordenar máquinas por producción ascendente
+        Collections.sort(machines);
+
+        backtrack(machines, target, new ArrayList<>(), 0, 0);
+
+        return mejorSolucion;
+    }
+
+    private boolean backtrack(List<Machine> machines, int target,
+                              List<Machine> seleccionadas,
+                              int acumulado,
+                              int nextIndex) {
+        String clave = acumulado + "-" + nextIndex;
+
+        if (memo.containsKey(clave)) {
+            return memo.get(clave);
+        }
+
+        if (acumulado == target) {
+            if (seleccionadas.size() < minMaquinas) {
+                mejorSolucion = new ArrayList<>(seleccionadas);
+                minMaquinas = seleccionadas.size();
+            }
+            memo.put(clave, true);
+            return true;
+        }
+
+        if (seleccionadas.size() >= minMaquinas) {
+            memo.put(clave, false);
+            return false;
+        }
+
+        boolean encontrado = false;
+        int machinesSize = machines.size();
+
+        for (int i = nextIndex; i < machinesSize; i++) {
+            Machine m = machines.get(i);
+            int nuevaSuma = acumulado + m.getProduction();
+
+            if (nuevaSuma > target) {
+                break;  // 🔥 Poda por ordenamiento
+            }
+
+            seleccionadas.add(m);
+            encontrado = backtrack(machines, target, seleccionadas, nuevaSuma, i) || encontrado;
+            seleccionadas.remove(seleccionadas.size() - 1);
+        }
+
+        memo.put(clave, encontrado);
+        return encontrado;
+    }
+}

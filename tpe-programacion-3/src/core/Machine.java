@@ -3,7 +3,7 @@ package core;
 /**
  * Representa una máquina productora de autopartes
  */
-public class Machine {
+public class Machine implements Comparable<Machine> {
     private final String id;       // Ej: "M1", "M2"
     private final int production;  // Piezas que produce por ciclo (ej: 7, 3)
 
@@ -36,6 +36,9 @@ public class Machine {
         if (!(obj instanceof Machine)) return false;
         Machine other = (Machine) obj;
         return id.equals(other.id) && production == other.production;
+    }
+    public int compareTo(Machine o) {
+        return Integer.compare(o.getProduction(), this.getProduction());
     }
 
     @Override
