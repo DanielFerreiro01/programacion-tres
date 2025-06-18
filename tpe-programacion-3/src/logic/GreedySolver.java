@@ -4,9 +4,33 @@ import core.Machine;
 
 import java.util.*;
 
+/*
+    Estrategia Greedy:
+
+        Este algoritmo resuelve el problema mediante un enfoque paso a paso. En cada iteración, seleccionamos la máquina disponible más grande que no supere la cantidad de piezas que nos faltan. La idea es acercarnos lo máximo posible al objetivo en cada selección, intentando minimizar el número total de máquinas utilizadas.
+
+    Cómo funciona:
+
+        Selección: En cada paso, buscamos la máquina que produzca más piezas sin exceder lo que falta para completar el objetivo.
+
+        Verificación: Si la máquina es útil (no nos hace pasarnos del objetivo), la agregamos a la solución.
+
+        Repetición: Seguimos hasta alcanzar el objetivo exacto o hasta que no queden máquinas útiles.
+
+    Ventajas:
+
+    Es rápido y fácil de entender.
+
+        Suele dar buenos resultados en la práctica, aunque no siempre es la solución perfecta.
+
+    Métrica: Contamos cuántas veces probamos máquinas ("estados generados") para comparar su eficiencia con otros métodos.
+
+    Complejidad Algorítmica:
+
+        En el peor caso, recorre todas las máquinas en cada paso. Si hay n máquinas, y en cada paso se elimina una, la complejidad es O(n²).
+*/
 
 public class GreedySolver {
-
 
     int estados;
 
