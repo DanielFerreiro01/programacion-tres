@@ -4,7 +4,6 @@ import core.Machine;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Collections;
 
 public class BacktrackingSolver {
@@ -16,7 +15,7 @@ public class BacktrackingSolver {
         cantEstados = 0;
 
         // Orden descendente para encontrar soluciones óptimas más rápido
-        Collections.sort(machines);
+        Collections.sort(machines, (a, b) -> b.getProduction() - a.getProduction());
 
         backtrack(machines, target, new ArrayList<>(), 0, 0);
         return mejorSolucion;
