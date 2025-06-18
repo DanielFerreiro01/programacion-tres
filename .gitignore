@@ -1,0 +1,20 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+### Archivos generados ###
+*.class
+*.log
+*.ctxt
+
+### Archivos del sistema ###
+.DS_Store
+Thumbs.db
+
+### Directorios de build ###
+target/
+build/
+bin/
