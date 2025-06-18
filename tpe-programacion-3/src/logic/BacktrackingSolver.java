@@ -95,7 +95,7 @@ public class BacktrackingSolver  {
         minMaquinas = Integer.MAX_VALUE;
         memo = new HashMap<>();
         setCantEstados(0);
-        // 🔹 Ordenar máquinas por producción ascendente
+       //Ordenar máquinas por producción ascendente
         Collections.sort(machines);
         backtrack(machines, target, new ArrayList<>(), 0, 0);
 
@@ -134,7 +134,7 @@ public class BacktrackingSolver  {
             int nuevaSuma = acumulado + m.getProduction();
 
             if (nuevaSuma > target) {
-                break;  // 🔥 Poda por ordenamiento
+                break;
             }
 
             seleccionadas.add(m);
