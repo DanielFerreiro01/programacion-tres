@@ -15,7 +15,7 @@ public class BacktrackingSolver {
         cantEstados = 0;
 
         // Orden descendente para encontrar soluciones óptimas más rápido
-        Collections.sort(machines, (a, b) -> b.getProduction() - a.getProduction());
+        Collections.sort(machines);
 
         backtrack(machines, target, new ArrayList<>(), 0, 0);
         return mejorSolucion;
