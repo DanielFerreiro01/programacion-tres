@@ -1,5 +1,6 @@
 import core.Machine;
 import logic.BacktrackingSolver;
+import logic.GreedySolver;
 import utils.FileLoader;
 
 import java.util.ArrayList;
@@ -15,11 +16,24 @@ public class main {
                 new ArrayList<>(empresa.getMaquinas()),
                 empresa.getTotalPiezas()
         );
+        GreedySolver greedySolver= new GreedySolver();
+        List<Machine> solucion2 = greedySolver.resolver(
+                new ArrayList<>(empresa.getMaquinas()),
+                empresa.getTotalPiezas()
+        );
 
-        System.out.println("Solución encontrada (" + solucion.size() + " máquinas):");
+        System.out.println("Solución encontrada en bracktracking (" + solucion.size() + " máquinas):");
         for (Machine m : solucion) {
             System.out.println(m.getId());  // Aquí mostramos el nombre de la máquina
         }
         System.out.println("El total de estados generados es "+ solver.getCantEstados());
+
+        System.out.println("Solución encontrada  en greedy (" + solucion2.size() + " máquinas):");
+        for (Machine m : solucion2) {
+            System.out.println(m.getId());  // Aquí mostramos el nombre de la máquina
+        }
+        System.out.println("El total de estados generados es "+ greedySolver.getEstados());
+
+
     }
 }
