@@ -23,7 +23,6 @@ Limitaciones:
 Complejidad exponencial en el peor caso
 Complejidad:
 Temporal: O(n!) en peor caso (sin podas)
-Espacial: O(n) (profundidad de recursión)
 Eficiencia mejora notablemente con las podas implementadas
 Métrica:
 Registramos la cantidad de estados explorados para evaluar el rendimiento
