@@ -1,6 +1,6 @@
 package utils;
 
-import core.Machine;
+import core.Maquina;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FileLoader {
     private int totalPiezas;
-    private List<Machine> maquinas;
+    private List<Maquina> maquinas;
 
     public FileLoader() {
         this.maquinas = new ArrayList<>();
@@ -30,7 +30,7 @@ public class FileLoader {
                     if (partes.length == 2) {
                         String nombre = partes[0].trim();
                         int cantidad = Integer.parseInt(partes[1].trim());
-                        maquinas.add(new Machine(nombre, cantidad));
+                        maquinas.add(new Maquina(nombre, cantidad));
                     }
                 }
             }
@@ -46,7 +46,7 @@ public class FileLoader {
         return totalPiezas;
     }
 
-    public List<Machine> getMaquinas() {
+    public List<Maquina> getMaquinas() {
         return new ArrayList<>(maquinas); // Copia defensiva
     }
 }

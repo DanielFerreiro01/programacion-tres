@@ -1,6 +1,6 @@
 package utils;
 
-import core.Machine;
+import core.Maquina;
 import logic.BacktrackingSolver;
 import logic.GreedySolver;
 
@@ -11,7 +11,7 @@ public class SolverUtils {
 
     public static void resolverConBacktracking(FileLoader empresa) {
         BacktrackingSolver solver = new BacktrackingSolver();
-        List<Machine> solucion = solver.resolver(
+        List<Maquina> solucion = solver.resolver(
                 new ArrayList<>(empresa.getMaquinas()),
                 empresa.getTotalPiezas()
         );
@@ -21,7 +21,7 @@ public class SolverUtils {
 
     public static void resolverConGreedy(FileLoader empresa) {
         GreedySolver solver = new GreedySolver();
-        List<Machine> solucion = solver.resolver(
+        List<Maquina> solucion = solver.resolver(
                 new ArrayList<>(empresa.getMaquinas()),
                 empresa.getTotalPiezas()
         );
@@ -29,14 +29,14 @@ public class SolverUtils {
         mostrarSolucion(solucion, "greedy", solver.getEstados());
     }
 
-    public static void mostrarSolucion(List<Machine> solucion, String nombreAlgoritmo, int estados) {
+    public static void mostrarSolucion(List<Maquina> solucion, String nombreAlgoritmo, int estados) {
         if (solucion == null || solucion.isEmpty()) {
             System.out.println("No se encontró una solución con " + nombreAlgoritmo + ".");
             return;
         }
 
         System.out.println("Solución encontrada en " + nombreAlgoritmo + " (" + solucion.size() + " máquinas):");
-        for (Machine m : solucion) {
+        for (Maquina m : solucion) {
             if (m != null) {
                 System.out.println(m.getId());
             }
