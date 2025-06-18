@@ -7,7 +7,7 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args) {
-        FileLoader empresa = new FileLoader();
+        FileLoader empresa= new FileLoader();
         empresa.cargarDatos("tpe-programacion-3/src/maquinas.txt");
 
         BacktrackingSolver solver = new BacktrackingSolver();
