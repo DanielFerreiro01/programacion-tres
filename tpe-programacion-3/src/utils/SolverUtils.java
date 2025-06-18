@@ -16,11 +16,7 @@ public class SolverUtils {
                 empresa.getTotalPiezas()
         );
 
-        System.out.println("Solución encontrada en backtracking (" + solucion.size() + " máquinas):");
-        for (Machine m : solucion) {
-            System.out.println(m.getId());
-        }
-        System.out.println("El total de estados generados es " + solver.getCantEstados());
+        mostrarSolucion(solucion, "backtracking", solver.getCantEstados());
     }
 
     public static void resolverConGreedy(FileLoader empresa) {
@@ -30,10 +26,21 @@ public class SolverUtils {
                 empresa.getTotalPiezas()
         );
 
-        System.out.println("Solución encontrada en greedy (" + solucion.size() + " máquinas):");
-        for (Machine m : solucion) {
-            System.out.println(m.getId());
+        mostrarSolucion(solucion, "greedy", solver.getEstados());
+    }
+
+    public static void mostrarSolucion(List<Machine> solucion, String nombreAlgoritmo, int estados) {
+        if (solucion == null || solucion.isEmpty()) {
+            System.out.println("No se encontró una solución con " + nombreAlgoritmo + ".");
+            return;
         }
-        System.out.println("El total de candidatos generados es " + solver.getEstados());
+
+        System.out.println("Solución encontrada en " + nombreAlgoritmo + " (" + solucion.size() + " máquinas):");
+        for (Machine m : solucion) {
+            if (m != null) {
+                System.out.println(m.getId());
+            }
+        }
+        System.out.println("El total de estados/candidatos generados es " + estados);
     }
 }
