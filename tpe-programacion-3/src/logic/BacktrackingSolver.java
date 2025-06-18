@@ -6,26 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 /*
+    Estrategia Backtracking:
+        Este algoritmo explora sistemáticamente todas las combinaciones posibles de máquinas para encontrar la solución óptima. Comienza con las máquinas ordenadas de mayor a menor producción, lo que permite encontrar soluciones eficientes más rápido mediante podas inteligentes.
 
-Estrategia Backtracking:
-Este algoritmo explora sistemáticamente todas las combinaciones posibles de máquinas para encontrar la solución óptima. Comienza con las máquinas ordenadas de mayor a menor producción, lo que permite encontrar soluciones eficientes más rápido mediante podas inteligentes.
-Cómo funciona:
-Exploración: Prueba todas las combinaciones válidas de máquinas recursivamente
-Poda: Elimina ramas del árbol de búsqueda cuando:
-La solución parcial ya tiene más máquinas que la mejor solución encontrada
-La mejor solución encontrada es teóricamente óptima
-Selección: Mantiene siempre la mejor solución encontrada (la que usa menos máquinas)
-Ventajas:
-Garantiza encontrar la solución óptima cuando existe
-Las podas reducen significativamente el espacio de búsqueda
-Permite reutilización de máquinas
-Limitaciones:
-Complejidad exponencial en el peor caso
-Complejidad:
-Temporal: O(n!) en peor caso (sin podas)
-Eficiencia mejora notablemente con las podas implementadas
-Métrica:
-Registramos la cantidad de estados explorados para evaluar el rendimiento
+    Cómo funciona:
+        Exploración: Prueba todas las combinaciones válidas de máquinas recursivamente
+        Poda: Elimina ramas del árbol de búsqueda cuando:
+        La solución parcial ya tiene más máquinas que la mejor solución encontrada
+        La mejor solución encontrada es teóricamente óptima
+        Selección: Mantiene siempre la mejor solución encontrada (la que usa menos máquinas)
+
+    Ventajas:
+        Garantiza encontrar la solución óptima cuando existe
+        Las podas reducen significativamente el espacio de búsqueda
+        Permite reutilización de máquinas
+
+    Complejidad:
+        Temporal: O(n!) en peor caso (sin podas)
+        Eficiencia mejora notablemente con las podas implementadas
+
+    Métrica:
+        Registramos la cantidad de estados explorados para evaluar el rendimiento
 */
 
 public class BacktrackingSolver {
@@ -36,7 +37,6 @@ public class BacktrackingSolver {
         mejorSolucion = new ArrayList<>();
         cantEstados = 0;
 
-        // Orden descendente para encontrar soluciones óptimas más rápido
         Collections.sort(maquinas);
 
         backtrack(maquinas, target, new ArrayList<>(), 0, 0);
@@ -49,7 +49,6 @@ public class BacktrackingSolver {
                            int startIndex) {
         cantEstados++;
 
-        // Poda: si ya tenemos una solución mejor que la potencial actual
         if (!mejorSolucion.isEmpty() && seleccionadas.size() >= mejorSolucion.size()) {
             return;
         }
@@ -68,10 +67,9 @@ public class BacktrackingSolver {
             if (nuevaSuma > target) continue;
 
             seleccionadas.add(m);
-            backtrack(maquinas, target, seleccionadas, nuevaSuma, i); // Permite reusar máquinas
+            backtrack(maquinas, target, seleccionadas, nuevaSuma, i);
             seleccionadas.remove(seleccionadas.size() - 1);
 
-            // Poda adicional: si la mejor solución ya es de tamaño mínimo posible
             if (!mejorSolucion.isEmpty() && mejorSolucion.size() == (target / maquinas.get(0).getProduccion())) {
                 return;
             }

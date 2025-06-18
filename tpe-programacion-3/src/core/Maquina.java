@@ -1,11 +1,8 @@
 package core;
 
-/**
- * Representa una máquina productora de autopartes
- */
 public class Maquina implements Comparable<Maquina> {
-    private final String id;       // Ej: "M1", "M2"
-    private final int produccion;  // Piezas que produce por ciclo (ej: 7, 3)
+    private final String id;
+    private final int produccion;
 
     public Maquina(String id, int produccion) {
         if (produccion <= 0) {
@@ -15,7 +12,6 @@ public class Maquina implements Comparable<Maquina> {
         this.produccion = produccion;
     }
 
-    // Getters (sin setters porque es inmutable)
     public String getId() {
         return id;
     }
@@ -29,7 +25,6 @@ public class Maquina implements Comparable<Maquina> {
         return id + " (Producción: " + produccion + " piezas)";
     }
 
-    // Útil para comparaciones en algoritmos
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

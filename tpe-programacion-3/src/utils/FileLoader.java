@@ -26,7 +26,7 @@ public class FileLoader {
                     this.totalPiezas = Integer.parseInt(linea.trim());
                     primeraLinea = false;
                 } else {
-                    String[] partes = linea.split(",");  // Cambiado a coma (,) en lugar de punto (.)
+                    String[] partes = linea.split(",");
                     if (partes.length == 2) {
                         String nombre = partes[0].trim();
                         int cantidad = Integer.parseInt(partes[1].trim());
@@ -41,12 +41,11 @@ public class FileLoader {
         }
     }
 
-    // Getters
     public int getTotalPiezas() {
         return totalPiezas;
     }
 
     public List<Maquina> getMaquinas() {
-        return new ArrayList<>(maquinas); // Copia defensiva
+        return new ArrayList<>(maquinas);
     }
 }

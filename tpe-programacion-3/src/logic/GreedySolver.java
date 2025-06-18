@@ -6,28 +6,22 @@ import java.util.*;
 
 /*
     Estrategia Greedy:
-
         Este algoritmo resuelve el problema mediante un enfoque paso a paso. En cada iteración, seleccionamos la máquina disponible más grande que no supere la cantidad de piezas que nos faltan. La idea es acercarnos lo máximo posible al objetivo en cada selección, intentando minimizar el número total de máquinas utilizadas.
 
     Cómo funciona:
-
         Selección: En cada paso, buscamos la máquina que produzca más piezas sin exceder lo que falta para completar el objetivo.
-
         Verificación: Si la máquina es útil (no nos hace pasarnos del objetivo), la agregamos a la solución.
-
         Repetición: Seguimos hasta alcanzar el objetivo exacto o hasta que no queden máquinas útiles.
 
     Ventajas:
-
-    Es rápido y fácil de entender.
-
+        Es rápido y fácil de entender.
         Suele dar buenos resultados en la práctica, aunque no siempre es la solución perfecta.
 
-    Métrica: Contamos cuántas veces probamos máquinas ("estados generados") para comparar su eficiencia con otros métodos.
-
     Complejidad Algorítmica:
-
         En el peor caso, recorre todas las máquinas en cada paso. Si hay n máquinas, y en cada paso se elimina una, la complejidad es O(n²).
+
+    Métrica:
+        Contamos cuántas veces probamos máquinas ("estados generados") para comparar su eficiencia con otros métodos.
 */
 
 public class GreedySolver {
@@ -39,16 +33,15 @@ public class GreedySolver {
     }
 
     public List<Maquina> resolver(ArrayList<Maquina> candidatos, int target) {
-        ArrayList<Maquina> solucion = new ArrayList<>(); // Conjunto solución (S)
+        ArrayList<Maquina> solucion = new ArrayList<>();
         int acumulado = 0;
 
         while (!candidatos.isEmpty() && !esSolucion(acumulado, target)) {
             setEstados(getEstados()+1);
-            // Paso 1: Seleccionar el mejor candidato (máquina con mayor producción <= faltante)
+
             Maquina mejor = seleccionar(candidatos, target - acumulado);
             candidatos.remove(mejor);
 
-            // Paso 2: Verificar factibilidad y agregar a solución
             if (esFactible(acumulado, mejor.getProduccion(), target)) {
                 solucion.add(mejor);
                 acumulado += mejor.getProduccion();
@@ -58,27 +51,21 @@ public class GreedySolver {
         return esSolucion(acumulado, target) ? new ArrayList<>(solucion) : null;
     }
 
-    // ---- Métodos auxiliares según estructura de la cátedra ----
     private Maquina seleccionar(ArrayList<Maquina> candidatos, int faltante) {
         Maquina mejorMaquina = null;
-        int maxProduccionEncontrada = -1; // Inicializar con un valor que cualquier producción real superaría
+        int maxProduccionEncontrada = -1;
 
-        // Iteramos sobre cada máquina en la lista de candidatos
         for (Maquina m : candidatos) {
-            // Primero, verificamos la condición de filtro:
-            // La producción de la máquina no debe exceder lo que falta
+
             if (m.getProduccion() <= faltante) {
-                // Si la máquina cumple con el filtro, la comparamos con la mejor encontrada hasta ahora
+
                 if (m.getProduccion() > maxProduccionEncontrada) {
-                    // Si esta máquina produce más que la "mejor" anterior,
-                    // la convertimos en la nueva mejor máquina
                     mejorMaquina = m;
                     maxProduccionEncontrada = m.getProduccion();
                 }
             }
         }
 
-        // Al final del bucle, 'mejorMaquina' contendrá la máquina deseada o null si no se encontró ninguna
         return mejorMaquina;
     }
 
