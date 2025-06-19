@@ -38,7 +38,7 @@ Donde:
 
 3. **Resultados**: El programa ejecutará automáticamente ambos algoritmos:
     - **Backtracking**: Encuentra la solución óptima explorando todas las posibilidades
-    - **Greedy**: Proporciona una solución rápida usando un enfoque codicioso
+    - **Greedy**: Elige siempre la máquina más productiva en cada iteración
 
 ### Personalización
 Para probar con diferentes conjuntos de datos:
