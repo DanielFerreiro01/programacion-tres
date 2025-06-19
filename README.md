@@ -40,6 +40,11 @@ Donde:
     - **Backtracking**: Encuentra la solución óptima explorando todas las posibilidades
     - **Greedy**: Proporciona una solución rápida usando un enfoque codicioso
 
+### Personalización
+Para probar con diferentes conjuntos de datos:
+1. Modifica el archivo `maquinas.txt` siguiendo el formato especificado
+2. O cambia la ruta del archivo en el método `cargarDatos()` del archivo `main.java`
+
 ### Salida del programa
 El programa mostrará para cada algoritmo:
 - La **secuencia de máquinas** necesaria para producir las piezas requeridas
@@ -47,18 +52,6 @@ El programa mostrará para cada algoritmo:
 - Las **métricas de rendimiento**:
     - Backtracking: número de estados generados
     - Greedy: número de candidatos considerados
-
-### Personalización
-Para probar con diferentes conjuntos de datos:
-1. Modifica el archivo `maquinas.txt` siguiendo el formato especificado
-2. O cambia la ruta del archivo en el método `cargarDatos()` del archivo `main.java`
-
-### Complejidad Algorítmica
-El programa compara ambos enfoques en términos de **complejidad computacional**, evaluando:
-- **Calidad de la solución** (cantidad de puestas en funcionamiento necesarias)
-- **Costo de ejecución**:
-    - En Backtracking: cantidad de **estados generados**
-    - En Greedy: cantidad de **candidatos considerados**
 
 Estas métricas permiten contrastar la eficiencia y efectividad de cada técnica, brindando una perspectiva práctica sobre sus ventajas y limitaciones.
 
